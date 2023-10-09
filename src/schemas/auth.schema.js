@@ -7,7 +7,7 @@ export const registerSchema = z.object({
     email: z.string({
         required_error: 'Correo electronico es requerido'
     }).email({
-        required_error: 'email invalido'
+        required_error: 'Correo invalido'
     }),
     password: z.string({
         required_error: 'Contraseña es requerida'
@@ -20,7 +20,7 @@ export const loginSchema = z.object({
     email: z.string({
         required_error: 'Correo electronico es requerido'
     }).email({
-        required_error: 'email invalido'
+        message: 'Correo invalido'
     }),
     password: z.string({
         required_error: 'Contraseña es requerida'
