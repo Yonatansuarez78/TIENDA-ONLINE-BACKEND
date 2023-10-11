@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
             const res = await loginRequest(user);
             setUser(res.data);
             setIsAuthenticated(true)
-            console.log(res.data)
+            console.log(res)
         } catch (error) {
             if(Array.isArray(error.response.data)) {
                return setErrors(error.response.data)
