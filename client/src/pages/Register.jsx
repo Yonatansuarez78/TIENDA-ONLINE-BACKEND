@@ -18,6 +18,10 @@ function Register() {
         signup(values)
     })  
 
+    useEffect(() => {
+        if (isAuthenticated) navigate('/homeproducts')
+    }, [isAuthenticated])
+
   return (
       <section className="container">
           <div className="container-fluid">

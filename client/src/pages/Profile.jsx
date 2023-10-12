@@ -4,7 +4,6 @@ function Profile() {
   return (
     <div>
           Profile
-          Profile
     </div>
   )
 }

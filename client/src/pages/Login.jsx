@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 import { useNavigate, Link } from 'react-router-dom'
 import {useAuth} from '../context/AuthContext'
@@ -8,12 +8,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const {signin, errors: signinErrors} = useAuth()
+    const {signin, errors: signinErrors, isAuthenticated} = useAuth()
     const navigate = useNavigate()
 
     const onSubmit = handleSubmit(async (data) => {
         signin(data)
     })
+
+    useEffect(() => {
+        if (isAuthenticated) navigate('/homeproducts')
+    }, [isAuthenticated])
 
     return (
         <section className="container">
