@@ -24,6 +24,7 @@ function Register() {
 
   return (
       <section className="container">
+        <i class="bi bi-arrow-left-square-fill" onClick={() => {navigate('/')}}></i>
           <div className="container-fluid">
               <div className="row d-flex justify-content-center align-items-center">
                   <div className="col-lg-10 col-xl-9">

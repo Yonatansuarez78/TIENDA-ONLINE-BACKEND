@@ -194,7 +194,7 @@ function Footer() {
                                   <img src={telefono} alt=""></img>
                                   <a
                                       target="_blank"
-                                      href="https://api.whatsapp.com/send?phone=573226178911"
+                                      href="https://api.whatsapp.com/send?phone=573182268916"
                                       className="footer__list-link ms-1">
                                       +57 3182268916
                                   </a>
@@ -204,7 +204,7 @@ function Footer() {
 
                                   <a
                                       target="_blank"
-                                      href="https://api.whatsapp.com/send?phone=573011800105"
+                                      href="https://api.whatsapp.com/send?phone=573182268916"
                                       className="footer__list-link ms-1" >
                                       +57 3182268916
                                   </a>
