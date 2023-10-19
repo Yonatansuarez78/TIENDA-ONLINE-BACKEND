@@ -5,7 +5,7 @@ import {useNavigate, Link} from 'react-router-dom'
 
 import '../styles/pages/register.css'
 
-function Register() {
+function Register() {   
     const {register, handleSubmit, formState: {errors}} = useForm()
     const { signup, isAuthenticated, errors: registerErrors } = useAuth()
     const navigate = useNavigate()
