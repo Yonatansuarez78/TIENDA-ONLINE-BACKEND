@@ -29,7 +29,7 @@ function Login() {
                             <div className="">
                                 <div className="row justify-content-center">
                                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                        <p className="text-center h2 fw-bold mb-4 mx-1 mx-md-4 mt-4">Signin</p>
+                                        <p className="text-center h2 fw-bold mb-4 mx-1 mx-md-4 mt-4">Inicia sesión</p>
                                         {signinErrors.map((error, i) => (<div className='bg-danger-subtle text-black font-bold text-center m-2' key={i}>{error}</div>))}
                                         <form className="mx-1 mx-md-4" onSubmit={onSubmit}>
                                             <div className="d-flex flex-row align-items-center mb-4">

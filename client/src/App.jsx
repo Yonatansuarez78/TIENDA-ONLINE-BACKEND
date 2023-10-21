@@ -4,10 +4,10 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import { AuthProvider } from './context/AuthContext'
-import Profile from './pages/Profile'
+import Profile from './pages/PagesPrivate/Profile'
 import Products from './pages/Products'
 import ProtectedRoute from './ProtectedRoute'
-import HomeProducts from './pages/HomeProducts'
+import HomeProducts from './pages/PagesPrivate/HomeProducts'
 
 
 function App() {

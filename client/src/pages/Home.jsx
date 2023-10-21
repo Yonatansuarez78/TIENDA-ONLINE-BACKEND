@@ -2,10 +2,16 @@ import React from 'react'
 import Slider from '../components/Slider'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import {useNavigate} from 'react-router-dom'
 
 import slider from '../assets/IconsPages/ImagesHome/slider.jpg'
 
 function Home() {
+  const navigate = useNavigate()
+
+  const goRegister = () => {
+    navigate('/login')
+  }
   return (
     <>
     <Navbar/>
@@ -23,7 +29,7 @@ function Home() {
          No te pierdas la oportunidad de obtener tus articulos favoritos
         ¡Regístrate ahora y comienza a comprar en línea de manera exitosa!"</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" class="btn btn-outline-secondary btn-lg px-4">Registrate AQUI</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4" onClick={goRegister}>Registrate AQUI</button>
         </div>
       </div>
     </div>

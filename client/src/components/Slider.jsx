@@ -9,13 +9,13 @@ function Slider() {
           <div id="carouselExampleFade" class="carousel slide carousel-fade">
               <div class="carousel-inner">
                   <div class="carousel-item active">
-                      <img src={slider} class="d-block w-100" alt="..."></img>
+                      <img src={slider} class="d-block w-100 rounded-4" alt="..."></img>
                   </div>
                   <div class="carousel-item">
-                      <img src={sliderVentas}  class="d-block w-100" alt="..."></img>
+                      <img src={sliderVentas} class="d-block w-100 rounded-4" alt="..."></img>
                   </div>
                   <div class="carousel-item">
-                      <img src={slider}  class="d-block w-100" alt="..."></img>
+                      <img src={slider} class="d-block w-100 rounded-4" alt="..."></img>
                   </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
