@@ -8,6 +8,8 @@ import Profile from './pages/PagesPrivate/Profile'
 import Products from './pages/Products'
 import ProtectedRoute from './ProtectedRoute'
 import HomeProducts from './pages/PagesPrivate/HomeProducts'
+import Pedidos from './pages/PagesPrivate/Pedidos'
+import Cupones from './pages/PagesPrivate/Cupones'
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
           <Route element={<ProtectedRoute/>}>
             <Route path='/homeproducts' element={<HomeProducts />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/pedidos' element={<Pedidos />} />
+            <Route path='/cupones' element={<Cupones />} />
             <Route path='/products' element={<Products />} />
           </Route>
 

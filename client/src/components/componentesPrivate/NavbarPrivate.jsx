@@ -4,13 +4,13 @@ import "../../styles/componentsStylesPrivate/navbarPrivate.css"
 import { useAuth } from '../../context/AuthContext'
 
 function NavbarPrivate() {
-    const {logout} = useAuth();
+    const {logout, user} = useAuth();
     return (
         <>
         <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <Link className="navbar-brand font-weight-bold">Online Store</Link>
+                        <Link className="navbar-brand font-weight-bold" to="/homeproducts">Online Store</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -29,6 +29,7 @@ function NavbarPrivate() {
                                 <a className="nav-link active" aria-current="page" href="#">Lo mas comprado</a>
                             </li>
                         </ul>
+                        <p className='m-1'>{user.username}</p>
 
                             <div className="">
                                 <div className="flex-shrink-0 dropdown custom-dropdown">
@@ -36,9 +37,9 @@ function NavbarPrivate() {
                                         <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" className="rounded-circle" />
                                     </a>
                                     <ul className="dropdown-menu text-small shadow">
-                                        <li><a className="dropdown-item" href="#">Perfil</a></li>
-                                        <li><a className="dropdown-item" href="#">Mis pedidos</a></li>
-                                        <li><a className="dropdown-item" href="#">Cupones</a></li>
+                                        <li><Link to="/profile" className="dropdown-item">Perfil</Link></li>
+                                        <li><Link to="/pedidos" className="dropdown-item">Mis pedidos</Link></li>
+                                        <li><Link to="/cupones" className="dropdown-item">Cupones</Link></li>
                                         <li><hr className="dropdown-divider" /></li>
                                         <li><Link to="/" onClick={logout}> <button className="dropdown-item">Cerrar sesión</button> </Link></li>
                                     </ul>
