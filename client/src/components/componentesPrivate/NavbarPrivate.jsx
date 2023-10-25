@@ -5,12 +5,12 @@ import { useAuth } from '../../context/AuthContext'
 
 function NavbarPrivate() {
     const {logout, user} = useAuth();
-    return (
+    return (    
         <>
         <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                        <Link className="navbar-brand font-weight-bold" to="/homeproducts">Online Store</Link>
+                        <Link className="navbar-brand font-weight-bold" to="/">Online Store</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
