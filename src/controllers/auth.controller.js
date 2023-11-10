@@ -34,29 +34,38 @@ export const register = async(req, res) => {
 }
 
 export const login = async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = req.body;
+
     try {
-        const userFound = await User.findOne({email})
-        if(!userFound) return res.status(400).json({ message: "usuario no encontrado"})
+        const userFound = await User.findOne({ email });
 
-        const isMatch = await bcrypt.compare(password, userFound.password)
-        if(!isMatch) res.status(400).json({ message: "contraseña incorrecta"})
+        if (!userFound) {
+            return res.status(400).json({ message: "Usuario no encontrado" });
+        }
 
-        const token = await createAcessToken({ id: userFound._id })
- 
-        res.cookie('token', token)
+        const isMatch = await bcrypt.compare(password, userFound.password);
+
+        if (!isMatch) {
+            return res.status(400).json({ message: "Contraseña incorrecta" });
+        }
+
+        const token = await createAcessToken({ id: userFound._id });
+
+        res.cookie('token', token);
         res.json({
             id: userFound._id,
             username: userFound.username,
-            idemail: userFound.email,
+            email: userFound.email,
             createdAt: userFound.createdAt,
             updatedAt: userFound.updatedAt
-
-        })
+        });
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        console.error(error); // Imprime el error en la consola para debug
+        res.status(500).json({ message: "Error interno del servidor" });
     }
-}
+};
+
+
 
 export const logout = (req, res) => {
     res.cookie('token', " ", {
