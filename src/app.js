@@ -6,8 +6,14 @@ import cors from 'cors'
 
 const app = express()
 
+
+const welcomeMessage = '¡Bienvenido al backend!';
+app.get('/', (req, res) => {
+    res.send(welcomeMessage);
+});
+
 app.use(cors({
-    origin: '',
+    origin: 'http://localhost:5173',
     credentials: true
 }))
 app.use(morgan('dev'))
