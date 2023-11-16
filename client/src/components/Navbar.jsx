@@ -42,8 +42,8 @@ function Navbar() {
                             </li>
                         </ul>
                         <div className="d-flex">
-                            <button className="btn btn-outline-success m-1" onClick={goLogin}>Inicia sesión</button>
-                            <button className="btn btn-outline-success m-1" onClick={goRegister}>Registrate</button>
+                            <button className="btn btn-primary m-1" onClick={goLogin}>Inicia sesión</button>
+                            <button className="btn btn-primary m-1" onClick={goRegister}>Registrate</button>
                         </div>
                     </div>
                 </div>

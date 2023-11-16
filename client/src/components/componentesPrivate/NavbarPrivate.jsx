@@ -17,7 +17,7 @@ function NavbarPrivate() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item ">
-                                <a className="nav-link active " aria-current="page" href="#">Inicio</a>
+                                    <Link className="nav-link active " aria-current="page" to="/HomeProducts">Inicio</Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link active" aria-current="page" href="#">Precios top</a>
@@ -41,7 +41,7 @@ function NavbarPrivate() {
                                         <li><Link to="/pedidos" className="dropdown-item">Mis pedidos</Link></li>
                                         <li><Link to="/cupones" className="dropdown-item">Cupones</Link></li>
                                         <li><hr className="dropdown-divider" /></li>
-                                        <li><Link to="/" onClick={logout}> <button className="dropdown-item">Cerrar sesión</button> </Link></li>
+                                        <li><Link className="dropdown-item" to="/" onClick={logout}>Cerrar sesión</Link></li>
                                     </ul>
                                 </div>
                             </div>

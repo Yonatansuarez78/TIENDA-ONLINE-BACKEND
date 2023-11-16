@@ -5,6 +5,7 @@ function HomeProducts() {
   return (
     <>
       <NavbarPrivate/>
+      Home Products
     </>
   )
 }

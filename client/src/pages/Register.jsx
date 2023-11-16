@@ -1,14 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useForm} from 'react-hook-form'
 import {useAuth} from '../context/AuthContext'
 import {useNavigate, Link} from 'react-router-dom'
+import TermAndConditions from './TermAndConditions'
+
+import { Modal, Button } from 'react-bootstrap';
 
 import '../styles/pages/register.css'
+
 
 function Register() {   
     const {register, handleSubmit, formState: {errors}} = useForm()
     const { signup, isAuthenticated, errors: registerErrors } = useAuth()
     const navigate = useNavigate()
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
     useEffect(() => {
         if(isAuthenticated) navigate('/')
@@ -55,15 +64,31 @@ function Register() {
                                               <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                                               <div className="form-outline flex-fill mb-0">
                                                   <input type="password" className="form-control" {...register("password", { required: true })} placeholder='Contraseña'/>
-                                 
                                                   {errors.password && (<p className='text-danger' style={{ fontSize: '13px' }}>Contraseña es requerida</p>)}
                                               </div>
                                           </div>
                                           <div className="form-check d-flex justify-content-center mb-5">
                                               <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
                                               <label className="form-check-label" htmlFor="form2Example3">
-                                                <a href="#!">Aceptar Terminos y condiciones</a>
+                                                  <a onClick={handleShow}>Aceptar Terminos y condiciones</a>
                                               </label>
+
+                                              <Modal show={showModal} onHide={handleClose} dialogClassName="custom-modal modal-dialog-scrollable">
+                                                  <Modal.Header closeButton>
+                                                      <Modal.Title>Términos y Condiciones</Modal.Title>
+                                                  </Modal.Header>
+                                                  <Modal.Body>
+                                                      <p><TermAndConditions /></p>
+                                                  </Modal.Body>
+                                                  <Modal.Footer>
+                                                      <Button variant="primary" onClick={handleClose}>
+                                                          Aceptar
+                                                      </Button>
+                                                  </Modal.Footer>
+                                              </Modal>
+
+
+
                                           </div>
                                           <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                               <button type="submit" className="btn btn-primary btn-lg">Registrate</button>
