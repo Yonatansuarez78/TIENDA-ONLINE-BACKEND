@@ -7,16 +7,16 @@ import cors from 'cors'
 const app = express()
 
 
-// const welcomeMessage = '¡Bienvenido al backend!';
-// app.get('/', (req, res) => {
-//     res.send(welcomeMessage);
-// });
+const welcomeMessage = '¡Bienvenido al backend!';
+app.get('/', (req, res) => {
+    res.send(welcomeMessage);
+});
 
 app.use(cors({
-    origin: 'http://localhost:3000',
-    // origin: '*',
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
     credentials: true
 }))
+
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cookieParser())
