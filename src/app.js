@@ -14,6 +14,8 @@ app.get('/', (req, res) => {
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    // origin: process.env.CORS_ORIGIN || 'https://tienda-online-frontend.vercel.app',
+    
     credentials: true
 }))
 
