@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/index.js",
+    "build": "babel src -d dist",
     "start:prod": "node src/index.js"
   },
   "keywords": [],
@@ -24,6 +25,9 @@
     "zod": "^3.22.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.9",
+    "@babel/preset-env": "^7.24.8",
     "nodemon": "^3.0.1"
   }
 }
