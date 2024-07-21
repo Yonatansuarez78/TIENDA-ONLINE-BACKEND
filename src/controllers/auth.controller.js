@@ -106,3 +106,43 @@ export const verifyToken = async (req, res) => {
         });
     });
 };
+
+
+
+export const updateUser = async (req, res) => {
+    const { username, password } = req.body;
+    const userId = req.user.id; // Suponiendo que el ID del usuario viene del middleware de autenticación
+
+    try {
+        const updatedFields = {};
+
+        // Validación básica (podrías usar una librería de validación más robusta)
+        if (username && typeof username === 'string') {
+            updatedFields.username = username;
+        }
+        if (password && typeof password === 'string' && password.length >= 6) {
+            const salt = await bcrypt.genSalt(10);
+            updatedFields.password = await bcrypt.hash(password, salt);
+        }
+
+        // Actualizar usuario
+        const user = await User.findByIdAndUpdate(userId, updatedFields, { new: true, select: '-password' });
+        if (!user) {
+            return res.status(404).json({ msg: 'Usuario no encontrado' });
+        }
+
+        // Generar nuevo token
+        const payload = {
+            user: {
+                id: user.id,
+                username: user.username
+            }
+        };
+
+        const newToken = jwt.sign(payload, TOKEN_SECRET);
+        res.json({ user, token: newToken });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ msg: 'Error en el servidor' });
+    }
+};
