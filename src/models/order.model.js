@@ -25,7 +25,9 @@ const orderSchema = new mongoose.Schema({
         ciudad: { type: String, required: true },
         direccion: { type: String, required: true }
     },
-    metodo_pago: { type: String, required: true }
+    metodo_pago: { type: String, required: true },
+    precioTotal: { type: String, required: true },
+    totalConIva: { type: String, required: true }
 }, { timestamps: true });
 
 // Crear y exportar el modelo de pedido
