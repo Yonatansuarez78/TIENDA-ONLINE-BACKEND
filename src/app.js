@@ -37,7 +37,7 @@ const app = express();
 // Configuración de CORS
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://tienda-online-frontend.vercel-mnvh.app',
+    'https://tienda-online-frontend.vercel.app',
 ];
 
 const corsOptions = {
