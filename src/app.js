@@ -34,28 +34,33 @@ import cors from 'cors';
 
 const app = express();
 
-// Configuración de CORS
-const allowedOrigins = [
-    'http://localhost:3000',
-    'https://tienda-online-frontend.vercel.app',
-];
+// // Configuración de CORS
+// const allowedOrigins = [
+//     'http://localhost:3000',
+//     'https://tienda-online-frontend.vercel.app',
+// ];
 
-const corsOptions = {
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true,
-};
+// const corsOptions = {
+//     origin: (origin, callback) => {
+//         if (!origin || allowedOrigins.includes(origin)) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// Configuración de middleware
 
-const welcomeMessage = '¡Bienvenido al backend!';
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
+// app.use(cors(corsOptions));
+
 app.get('/', (req, res) => {
-    res.send(welcomeMessage);
+    res.send('¡Bienvenido al backend!');
 });
 
 app.use(morgan('dev'));
