@@ -6,9 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js",
-    "build": "babel src -d dist",
-    "start:prod": "node src/index.js"
+    "start": "node src/index.js",
+    "build": "babel src -d dist"
   },
   "keywords": [],
   "author": "",
