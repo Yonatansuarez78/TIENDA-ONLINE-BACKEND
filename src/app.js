@@ -26,6 +26,7 @@ app.use(cors(corsOptions));
 
 
 app.get('/', (req, res) => {
+    console.log('GET / request received.');
     res.send('¡Bienvenido al backend!');
 });
 
