@@ -1,6 +1,6 @@
-import app from './app.js'
-import { PORT } from "./config.js";
-import { connectDB } from "./db.js";
+import app from './src/app.js'
+import { PORT } from "./src/config.js";
+import { connectDB } from "./src/db.js";
 
 
 async function main() {
