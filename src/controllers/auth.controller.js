@@ -10,6 +10,7 @@ export const register = async(req, res) => {
         const userFound = await User.findOne({email})
         if (userFound) return res.status(400).json(["Correo electronico ya existe"])
         const passwordHash = await bcrypt.hash(password, 10)    
+        console.log('Hashed generado en registro:', passwordHash); // Verifica el hash generado
                                                                                             
         const newUser = new User({
             username,
@@ -43,21 +44,22 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Usuario no encontrado" });
         }
 
-        const isMatch = await bcrypt.compare(password, userFound.password);
+        // Verifica el hash almacenado
+        console.log('Stored hash:', userFound.password);
 
-        if (!isMatch) {
-            return res.status(400).json({ message: "Contraseña incorrecta" });
-        }
+        // Comparar la contraseña ingresada con el hash almacenado
+        const isMatch = await bcrypt.compare(password, userFound.password);
+        console.log('Password match:', isMatch);
+        if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
+
+        // const isMatch = await bcrypt.compare(password, userFound.password);
+        // if (!isMatch) {
+        //     return res.status(400).json({ message: "Contraseña incorrecta" });
+        // }
 
         const token = await createAcessToken({ id: userFound._id });
 
-        // res.cookie('token', token);
-        res.cookie('token', token, {
-            httpOnly: true,
-            // secure: false, // Solo en producción
-            sameSite: 'None'
-        });
-       
+        res.cookie('token', token);
         res.json({
             id: userFound._id,
             username: userFound.username,
@@ -70,7 +72,6 @@ export const login = async (req, res) => {
         res.status(500).json({ message: "Error interno del servidor" });
     }
 };
-
 
 
 export const logout = (req, res) => {
