@@ -5,20 +5,23 @@ import jwt from 'jsonwebtoken'
 import {TOKEN_SECRET} from '../config.js'
 
 export const register = async(req, res) => {
-    const { email, password, username} = req.body
+    const { username, email, password } = req.body
     try {
         const userFound = await User.findOne({email})
         if (userFound) return res.status(400).json(["Correo electronico ya existe"])
-        const passwordHash = await bcrypt.hash(password, 10)    
-        console.log('Hashed generado en registro:', passwordHash); // Verifica el hash generado
+
+        // const passwordHash = await bcrypt.hash(password, 10)    
+        // console.log('Hashed generado en registro:', passwordHash); // Verifica el hash generado
                                                                                             
         const newUser = new User({
             username,
             email,
-            password: passwordHash
+            password
         })
         const userSaved = await newUser.save()
+        console.log('usuario guardado:', userSaved)
         const token = await createAcessToken({id: userSaved._id})
+        console.log('token:', token)
 
         res.cookie('token', token)
         res.json({
@@ -45,11 +48,12 @@ export const login = async (req, res) => {
         }
 
         // Verifica el hash almacenado
-        console.log('Stored hash:', userFound.password);
+        // console.log('hash almacenado para usuario:', userFound.password);
 
         // Comparar la contraseña ingresada con el hash almacenado
         const isMatch = await bcrypt.compare(password, userFound.password);
         console.log('Password match:', isMatch);
+        console.log('usuario encontrado datos: ', userFound)
         if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
         // const isMatch = await bcrypt.compare(password, userFound.password);
