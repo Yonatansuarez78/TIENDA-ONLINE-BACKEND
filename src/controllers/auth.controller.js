@@ -47,19 +47,8 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Usuario no encontrado" });
         }
 
-        // Verifica el hash almacenado
-        // console.log('hash almacenado para usuario:', userFound.password);
-
-        // Comparar la contraseña ingresada con el hash almacenado
         const isMatch = await bcrypt.compare(password, userFound.password);
-        console.log('Password match:', isMatch);
-        console.log('usuario encontrado datos: ', userFound)
         if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
-
-        // const isMatch = await bcrypt.compare(password, userFound.password);
-        // if (!isMatch) {
-        //     return res.status(400).json({ message: "Contraseña incorrecta" });
-        // }
 
         const token = await createAcessToken({ id: userFound._id });
 
@@ -119,15 +108,14 @@ export const verifyToken = async (req, res) => {
 };
 
 
-
 export const updateUser = async (req, res) => {
     const { username, password } = req.body;
-    const userId = req.user.id; // Suponiendo que el ID del usuario viene del middleware de autenticación
+    const userId = req.user.id;
 
     try {
         const updatedFields = {};
 
-        // Validación básica (podrías usar una librería de validación más robusta)
+        // Validación básica
         if (username && typeof username === 'string') {
             updatedFields.username = username;
         }
