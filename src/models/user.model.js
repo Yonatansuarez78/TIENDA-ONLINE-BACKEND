@@ -16,23 +16,26 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    
+    resetToken: String,
+    resetTokenExpiration: Date,
 }, {
     timestamps: true
 });
 
 
-// Middleware para hashear la contraseña antes de guardarla
-userSchema.pre('save', async function (next) {
-    // Si la contraseña no ha sido modificada, pasa al siguiente middleware
-    if (!this.isModified('password')) {
-        return next();
-    }
+// // Middleware para hashear la contraseña antes de guardarla
+// userSchema.pre('save', async function (next) {
+//     // Si la contraseña no ha sido modificada, pasa al siguiente middleware
+//     if (!this.isModified('password')) {
+//         return next();
+//     }
 
-    // Genera una sal y hashea la contraseña
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-});
+//     // Genera una sal y hashea la contraseña
+//     const salt = await bcrypt.genSalt(10);
+//     this.password = await bcrypt.hash(this.password, salt);
+//     next();
+// });
 
 export default mongoose.model('User', userSchema);
