@@ -171,7 +171,7 @@ export const forgotPassword = async (req, res) => {
         await userFound.save();
 
         // Enviar correo electrónico
-        const resetUrl = `http://localhost:3000/ResetPassword?token=${resetToken}`;
+        const resetUrl = `https://tienda-online-frontend.vercel.app/ResetPassword?token=${resetToken}`;
         await sendMail(userFound.email, 'Restablecimiento de contraseña', `
     <p>Haz clic en el siguiente enlace para restablecer tu contraseña: <a href="${resetUrl}">Restablecer contraseña</a></p>`);
 
