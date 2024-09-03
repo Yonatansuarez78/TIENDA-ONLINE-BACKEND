@@ -30,7 +30,15 @@ export const register = async (req, res) => {
         const token = await createAcessToken({ id: userSaved._id })
         console.log('token:', token)
 
-        res.cookie('token', token)
+        // res.cookie('token', token)
+        res.cookie('token', token, {
+            httpOnly: true, // Evita que el token sea accesible mediante JavaScript
+            secure: process.env.NODE_ENV === 'production', // Solo usar en HTTPS
+            sameSite: 'None', // Permitir cookies entre sitios cruzados
+        });
+        
+
+
         res.json({
             id: userSaved._id,
             username: userSaved.username,
