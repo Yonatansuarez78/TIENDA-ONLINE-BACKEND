@@ -8,7 +8,9 @@ const app = express();
 
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://tienda-online-frontend.vercel.app',
+    // 'https://tienda-online-frontend.vercel.app'
+    'https://tienda-online-frontend-mnvh-ivrxe2le8-yonatansuarez78s-projects.vercel.app',
+    
 ];
 
 const corsOptions = {

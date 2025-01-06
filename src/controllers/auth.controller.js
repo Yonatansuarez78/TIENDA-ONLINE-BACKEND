@@ -6,6 +6,7 @@ import { TOKEN_SECRET } from '../config.js'
 import sendMail from '../utils/mailer.js'
 import crypto from 'crypto'
 
+
 export const register = async (req, res) => {
     const { username, email, password } = req.body
     try {
@@ -156,28 +157,62 @@ export const updateUser = async (req, res) => {
 
 
 
+// export const forgotPassword = async (req, res) => {
+//     const { email } = req.body;
+//     try {
+//         const userFound = await User.findOne({ email });
+
+//         if (!userFound) {
+//             return res.status(400).json({ message: "Usuario no encontrado" });
+//         }
+//         // Generar un token
+//         const resetToken = crypto.randomBytes(32).toString('hex');
+//         userFound.resetToken = resetToken;
+//         userFound.resetTokenExpiration = Date.now() + 3600000; // 1 hora de validez
+//         await userFound.save();
+
+//         // Enviar correo electrónico
+//         const resetUrl = `https://tienda-online-frontend.vercel.app/ResetPassword?token=${resetToken}`;
+//         await sendMail(userFound.email, 'Restablecimiento de contraseña', `
+//         <p>Haz clic en el siguiente enlace para restablecer tu contraseña: <a href="${resetUrl}">Restablecer contraseña</a></p>`);
+
+//         res.status(200).json({ message: 'Correo de restablecimiento de contraseña enviado' });
+
+//     } catch (error) {
+//         console.error('Error en la solicitud de restablecimiento de contraseña:', error);
+//         res.status(500).json({ message: 'Error al procesar la solicitud' });
+//     }
+// };
+
+
+// Restablecer la contraseña
+
+
 export const forgotPassword = async (req, res) => {
     const { email } = req.body;
     try {
         const userFound = await User.findOne({ email });
 
-        if (!userFound) {
-            return res.status(400).json({ message: "Usuario no encontrado" });
-        }
+        if (!userFound){ return res.status(400).json({ message: 'Usuario no encontrado' });}
 
         // Generar un token
         const resetToken = crypto.randomBytes(32).toString('hex');
         userFound.resetToken = resetToken;
-        userFound.resetTokenExpiration = Date.now() + 3600000; // 1 hora de validez
+        userFound.resetTokenExpiration = Date.now() + 3600000; // 1 hora
         await userFound.save();
 
-        // Enviar correo electrónico
+        // URL de restablecimiento de contraseña
         const resetUrl = `https://tienda-online-frontend.vercel.app/ResetPassword?token=${resetToken}`;
-        await sendMail(userFound.email, 'Restablecimiento de contraseña', `
-    <p>Haz clic en el siguiente enlace para restablecer tu contraseña: <a href="${resetUrl}">Restablecer contraseña</a></p>`);
+        console.log('Enlace de restablecimiento:', resetUrl);
+
+        // Enviar correo
+        await sendMail(
+            userFound.email,
+            'Restablecimiento de contraseña',
+            `<p>Haz clic en el siguiente enlace para restablecer tu contraseña: <a href="${resetUrl}">Restablecer contraseña</a></p>`
+        );
 
         res.status(200).json({ message: 'Correo de restablecimiento de contraseña enviado' });
-
     } catch (error) {
         console.error('Error en la solicitud de restablecimiento de contraseña:', error);
         res.status(500).json({ message: 'Error al procesar la solicitud' });
@@ -185,7 +220,6 @@ export const forgotPassword = async (req, res) => {
 };
 
 
-// Restablecer la contraseña
 export const resetPassword = async (req, res) => {
     const { token, newPassword } = req.body;
 
