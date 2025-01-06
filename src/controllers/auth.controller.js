@@ -67,7 +67,8 @@ export const login = async (req, res) => {
             username: userFound.username,
             email: userFound.email,
             createdAt: userFound.createdAt,
-            updatedAt: userFound.updatedAt
+            updatedAt: userFound.updatedAt,
+            token
         });
     } catch (error) {
         console.error(error); // Imprime el error en la consola para debug
