@@ -150,6 +150,7 @@ export const updateUser = async (req, res) => {
 
         const newToken = jwt.sign(payload, TOKEN_SECRET);
         res.json({ user, token: newToken });
+        return res.status(200)
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ msg: 'Error en el servidor' });
