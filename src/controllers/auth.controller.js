@@ -24,13 +24,8 @@ export const register = async (req, res) => {
             email,
             password: hashedPassword
         })
-        
         const userSaved = await newUser.save()
-        console.log('usuario guardado:', userSaved)
-        
         const token = await createAcessToken({ id: userSaved._id })
-        console.log('token:', token)
-
         res.cookie('token', token)
         
         res.json({
@@ -38,8 +33,8 @@ export const register = async (req, res) => {
             username: userSaved.username,
             email: userSaved.email,
             createdAt: userSaved.createdAt,
-            updatedAt: userSaved.updatedAt
-
+            updatedAt: userSaved.updatedAt,
+            token: token 
         })
     } catch (error) {
         res.status(500).json({ message: error.message })
