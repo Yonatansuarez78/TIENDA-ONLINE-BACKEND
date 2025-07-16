@@ -5,7 +5,7 @@ const transporter = nodemailer.createTransport({
     service: 'Gmail', // Puedes usar otro servicio SMTP
     auth: {
         user: 'yonatansuarez78@gmail.com',
-        pass: 'rtys akzq qmoi vwov',
+        pass: 'zemh yzbo kqea cjgp',
     },
 }); 
 
