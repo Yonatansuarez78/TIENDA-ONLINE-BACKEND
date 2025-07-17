@@ -56,12 +56,14 @@ export const login = async (req, res) => {
 
         const token = await createAcessToken({ id: userFound._id });
 
-        // res.cookie('token', token);
+        const isLocalhost = req.headers.origin?.includes('localhost');
+
         res.cookie('token', token, {
             httpOnly: true,
-            secure: true, // obligatorio en https (Vercel lo es)
-            sameSite: 'none', // necesario cuando tu frontend y backend son diferentes dominios
+            secure: !isLocalhost,  // Solo secure en producción (HTTPS)
+            sameSite: isLocalhost ? 'lax' : 'none',  // lax para local, none para dominios cruzados
         });
+
 
         res.json({
             id: userFound._id,
