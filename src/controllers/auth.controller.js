@@ -101,22 +101,29 @@ export const profile = async (req, res) => {
 
 
 export const verifyToken = async (req, res) => {
-    const { token } = req.cookies;
-    if (!token) return res.send(false);
+    try {
+        const { token } = req.cookies;
+        if (!token) {
+            return res.status(401).json({ message: 'No token, authorization denied' });
+        }
 
-    jwt.verify(token, TOKEN_SECRET, async (error, user) => {
-        if (error) return res.sendStatus(401);
+        jwt.verify(token, TOKEN_SECRET, async (error, user) => {
+            if (error) return res.status(401).json({ message: 'Invalid token' });
 
-        const userFound = await User.findById(user.id);
-        if (!userFound) return res.sendStatus(401);
+            const userFound = await User.findById(user.id);
+            if (!userFound) return res.status(401).json({ message: 'User not found' });
 
-        return res.json({
-            id: userFound._id,
-            username: userFound.username,
-            email: userFound.email,
+            return res.json({
+                id: userFound._id,
+                username: userFound.username,
+                email: userFound.email,
+            });
         });
-    });
-};
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
 
 
 export const updateUser = async (req, res) => {

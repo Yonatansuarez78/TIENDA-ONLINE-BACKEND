@@ -4,20 +4,17 @@ import morgan from 'morgan';
 import authRoutes from './routes/auth.routes.js';
 import graficasRoutes from './routes/graficas-admin.routes.js'
 
-
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 const app = express();
 
 const allowedOrigins = [
-    'http://localhost:3000', //frontend local 
-    'http://localhost:5173', //dashboard admin local 
-    'http://localhost:8080',  //app flutter local
-
-    'https://tienda-online-frontend.vercel.app', //frontend
-    'https://tienda-online-dashboard-admin.vercel.app' //dashboard
-    
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'http://localhost:8080',
+    'https://tienda-online-frontend.vercel.app',
+    'https://tienda-online-dashboard-admin.vercel.app'
 ];
 
 const corsOptions = {
@@ -33,6 +30,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+/** 🔴 NO CACHE para todos los endpoints */
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+});
 
 app.get('/', (req, res) => {
     console.log('GET / request received.');
@@ -47,3 +49,4 @@ app.use("/api", authRoutes);
 app.use('/api/graficas', graficasRoutes);
 
 export default app;
+    
